@@ -9,7 +9,6 @@ class host_and_port:
         self.port = port
 
 
-
 class Setting_Tkinter(host_and_port):
     def __init__(self, host, port):
         super().__init__(host, port)
@@ -29,8 +28,6 @@ class Setting_Tkinter(host_and_port):
         send_button = tkinter.Button(self.top, text="Send", command=self.send)
         send_button.pack()
         self.top.protocol("WM_DELETE_WINDOW", self.on_closing)
-
-
 
 
 class Client(Setting_Tkinter):
@@ -89,7 +86,7 @@ class Client(Setting_Tkinter):
 #             self.sock.send(bytes(input(""), "utf8"))
 
 
-host_or_not = input("Are you host? [y/client]: ")
+host_or_not = input("Are you host? [host/client]: ")
 if host_or_not == "client":
     HOST = input("Enter Host? ")
     PORT = input("Enter Port? ")

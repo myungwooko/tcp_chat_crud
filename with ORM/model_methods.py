@@ -34,7 +34,6 @@ class User(Base):
         unique_number = Column(Integer)
         chatRoomNumber_id = Column(Integer, ForeignKey("chatRoomNumbers.id"))
 
-        # chatRoomNumber = relationship("ChatRoomNumber", foreign_keys=[chatRoomNumber_id])
         chatRoomNumber = relationship("ChatRoomNumber", back_populates="users")
 
 
@@ -158,9 +157,8 @@ def add_new_chatroom_id(unique_number):
 
 
 def getting_chatroom_id():
-        result = session.query(ChatRoomNumber.id).order_by(ChatRoomNumber.id.desc()).first()
-        session.commit()
-        return result
+        return  session.query(ChatRoomNumber.id).order_by(ChatRoomNumber.id.desc()).first()
+
 
 
 def user_id_by_tuple(tuple):
@@ -180,19 +178,15 @@ def getting_username_by_id(str_or_int):
 
 
 def all_users(chatRoomNumber_id):
-        result = session.query(User.username).filter(User.chatRoomNumber_id.like(chatRoomNumber_id))
-        session.commit()
-        return result
+        return session.query(User.username).filter(User.chatRoomNumber_id.like(chatRoomNumber_id))
 
 
 def delete_user(name):
         session.query(User).filter(User.username == name).delete()
-        session.commit()
 
 
 def all_messages(chatRoomNumber_id):
-        result =  session.query(Msg).filter(Msg.chatRoomNumber_id.like(chatRoomNumber_id))
-        session.commit()
-        return result
+        return session.query(Msg).filter(Msg.chatRoomNumber_id.like(chatRoomNumber_id))
+
 
 
